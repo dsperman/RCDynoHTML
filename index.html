@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Single Page Site</title>
+  <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --overlay: rgba(0, 0, 0, 0.38);
+      --button-bg: rgba(255, 255, 255, 0.12);
+      --button-border: rgba(255, 255, 255, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      isolation: isolate;
+    }
+
+    .bg-video,
+    .bg-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -3;
+    }
+
+    .bg-fallback {
+      display: none;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3),
+        var(--overlay),
+        rgba(0, 0, 0, 0.5)
+      );
+      z-index: -2;
+    }
+
+    .content {
+      max-width: 800px;
+      backdrop-filter: blur(2px);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.6;
+      max-width: 640px;
+      margin: 0 auto 1.75rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      text-decoration: none;
+      color: white;
+      background: var(--button-bg);
+      border: 1px solid var(--button-border);
+      transition: transform 0.2s ease, background 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .note {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      opacity: 0.8;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-video {
+        display: none;
+      }
+
+      .bg-fallback {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Best option: compressed MP4/WebM video for smooth looping and smaller file size than GIF -->
+    <video
+      class="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="fallback.jpg"
+    >
+      <!-- Replace these with your own files -->
+      <source src="background.webm" type="video/webm" />
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Fallback image if reduced motion is enabled or video is unavailable -->
+    <img class="bg-fallback" src="fallback.jpg" alt="Background still image" />
+
+    <div class="overlay"></div>
+
+    <section class="content">
+      <h1>Your Brand Here</h1>
+      <p>
+        A clean single-page site with a looping full-screen background video.
+        Replace this text with your headline, short description, and call to action.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="#">Get Started</a>
+        <a class="button" href="#">Learn More</a>
+      </div>
+    </section>
+
+    <div class="note">
+      Tip: use a short 5–15 second silent video clip exported as MP4/WebM for the best results.
+    </div>
+  </main>
+</body>
+</html>
